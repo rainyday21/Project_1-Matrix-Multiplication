@@ -1,12 +1,25 @@
-import java.util.Arrays;
+import java.util.*;
 
-public class matrix_mult {
+
+public class classic_mm {
     public static void main(String[] args){
-        int[][] m_1 = {{1,2}, {3,4}};
+        System.out.print("Enter dimensions (2^x): ");
+        Scanner kb = new Scanner(System.in);
+        int dim = (int)Math.pow(2, kb.nextInt());
+        int[][] m_cust = new int[dim][dim];
+        int count = 1;
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
+                m_cust[i][j] = count;
+                count++;
+            }
+        }
+        //int[][] m_1 = {{1, 2, 3, 4}, {5, 6, 7}};
         //int[][] m_2 = {{1,2}, {3,4}};
-        System.out.println("Classical array:" + Arrays.deepToString(classical(m_1, m_1)));
+        System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
+        System.out.println("Classical array:" + Arrays.deepToString(classical(m_cust, m_cust)));
         System.out.println("Divide and Conquer array:" +
-            Arrays.deepToString(classical(m_1, m_1)));
+            Arrays.deepToString(classical(m_cust, m_cust)));
     }
     
     public static int[][] classical(int[][] mat_1, int[][] mat_2){
@@ -88,7 +101,7 @@ public class matrix_mult {
         int [][] comb = new int[mat_1.length][mat_2[0].length];
         for (int i = 0; i < mat_1.length; i++){
             for (int j = 0; j < mat_1.length; j++){
-                comb[i][j] = mat_1[i][j] + mat[i][j];
+                comb[i][j] = mat_1[i][j] + mat_2[i][j];
             }
         }
         return comb;
