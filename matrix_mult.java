@@ -4,7 +4,9 @@ public class matrix_mult {
     public static void main(String[] args){
         int[][] m_1 = {{1,2}, {3,4}};
         //int[][] m_2 = {{1,2}, {3,4}};
-        System.out.println(Arrays.deepToString(classical(m_1, m_1)));
+        System.out.println("Classical array:" + Arrays.deepToString(classical(m_1, m_1)));
+        System.out.println("Divide and Conquer array:" +
+            Arrays.deepToString(classical(m_1, m_1)));
     }
     
     public static int[][] classical(int[][] mat_1, int[][] mat_2){
@@ -28,6 +30,7 @@ public class matrix_mult {
                 ans = two_by_two(mat_1, mat_2);
             }
             else {
+                ans = new int[mat_1.length][mat_2.length];
                 int mat_1_11[][] = new int[mat_1.length/2][mat_1[0].length/2];
                 int mat_1_12[][] = new int[mat_1.length/2][mat_1[0].length/2];
                 int mat_1_21[][] = new int[mat_1.length/2][mat_1[0].length/2];
@@ -65,9 +68,19 @@ public class matrix_mult {
                 int[][] ans_22 = add(
                         div_n_conq(mat_1_21, mat_2_12),
                         div_n_conq(mat_1_22, mat_2_22)
-                    );               
+                    );
+
+                for (int i = 0; i < mat_1.length/2; i++) {
+                    for (int j = 0; i < mat_2[0].length/2; j++) {
+                        ans[i][j] = ans_11[i][j];
+                        ans[i][j+mat_1.length] = ans_12[i][j];
+                        ans[i+mat_1.length][j] = ans_21[i][j];
+                        ans[i+mat_1.length][j+mat_2.length] = ans_22[i][j];
+                    }
+                }
+                           
             }
-        return null;
+        return ans;
         
     }
 
