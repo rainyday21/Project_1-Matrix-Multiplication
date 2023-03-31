@@ -50,23 +50,28 @@ public class matrix_mult {
                         mat_2_22[i][j] = mat_1[i+mat_1.length][j+mat_1.length];
                     }
                 }
-                int[][] ans_11 = two_by_two(
-                    div_n_conq(mat_1_11, mat_2_11),
-                    div_n_conq(mat_1_12, mat_2_21)
+                int[][] ans_11 = add(
+                        div_n_conq(mat_1_11, mat_2_11),
+                        div_n_conq(mat_1_12, mat_2_21)
                     );
-                int[][] ans_12 = div_n_conq(mat_1_11, mat_1_12);
-                int[][] ans_21 = div_n_conq(mat_1_21, mat_1_12);
-                int[][] ans_22 = div_n_conq(mat_1_21, mat_1_12);
-
-                two_by_two(ans_1, ans_2);
-                two_by_two(ans_)
-                
+                int[][] ans_12 = add(
+                        div_n_conq(mat_1_11, mat_2_12),
+                        div_n_conq(mat_1_12, mat_2_22)
+                    );
+                int[][] ans_21 = add(
+                        div_n_conq(mat_1_21, mat_2_11),
+                        div_n_conq(mat_1_22, mat_2_21)
+                    );
+                int[][] ans_22 = add(
+                        div_n_conq(mat_1_21, mat_2_12),
+                        div_n_conq(mat_1_22, mat_2_22)
+                    );               
             }
         return null;
         
     }
 
-    public static int[][] combine(int [][] mat_1, int[][] mat_2){
+    public static int[][] add(int [][] mat_1, int[][] mat_2){
         int [][] comb = new int[mat_1.length][mat_2[0].length];
         for (int i = 0; i < mat_1.length; i++){
             for (int j = 0; j < mat_1.length; j++){
