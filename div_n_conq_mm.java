@@ -3,21 +3,27 @@ import java.util.*;
 
 public class div_n_conq_mm {
     public static void main(String[] args){
-        System.out.print("Enter dimensions (2^x): ");
+        int dim;;
+        if (args.length <= 0){
+            System.out.print("Enter dimensions (2^x): ");
         Scanner kb = new Scanner(System.in);
-        int dim = (int)Math.pow(2, kb.nextInt());
+        dim = (int)Math.pow(2, kb.nextInt());
+        kb.close();
+        }
+        else{
+            dim = (int)Math.pow(2, Integer.valueOf(args[0]));
+        }
         long[][] m_cust = new long[dim][dim];
         int count = 1;
         for (int i = 0; i < dim; i++) {
             for (int j = 0; j < dim; j++) {
                 m_cust[i][j] = count;
                 count++;
+             }
             }
-        }
         System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
         System.out.println("Divide and Conquer array:" +
             Arrays.deepToString(div_n_conq(m_cust, m_cust)));
-        kb.close();
     }
     
     public static long[][] div_n_conq(long[][] mat_1, long[][] mat_2){

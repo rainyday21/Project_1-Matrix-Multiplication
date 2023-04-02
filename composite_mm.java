@@ -3,9 +3,16 @@ import java.util.*;
 
 public class composite_mm {
     public static void main(String[] args){
-        System.out.print("Enter dimensions (2^x): ");
+        int dim;;
+        if (args.length <= 0){
+            System.out.print("Enter dimensions (2^x): ");
         Scanner kb = new Scanner(System.in);
-        int dim = (int)Math.pow(2, kb.nextInt());
+        dim = (int)Math.pow(2, kb.nextInt());
+        kb.close();
+        }
+        else{
+            dim = (int)Math.pow(2, Integer.valueOf(args[0]));
+        }
         long[][] m_cust = new long[ dim][dim];
         int count = 1;
         for (int i = 0; i < dim; i++) {
@@ -26,11 +33,11 @@ public class composite_mm {
     public static long[][] classical(long[ ][] mat_1, long[ ][] mat_2){
         int rows = mat_1.length;
         int cols = mat_2[0].length;
-        long[ ][] mat_f = new long[ rows][cols];
+        long[ ][] mat_f = new long[rows][cols];
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
                 mat_f[i][j] = 0;
-                for (int k = 0; k < mat_f.length-1; k++)
+                for (int k = 0; k < mat_f.length; k++)
                     mat_f[i][j] += mat_1[i][k] * mat_2[k][j];
             }
         }
@@ -99,7 +106,7 @@ public class composite_mm {
     }
 
     public static long[][] add(long [][] mat_1, long[][] mat_2){
-        long [][] comb = new long[ mat_1.length][mat_2[0].length];
+        long [][] comb = new long[mat_1.length][mat_2[0].length];
         for (int i = 0; i < mat_1.length; i++){
             for (int j = 0; j < mat_1.length; j++){
                 comb[i][j] = mat_1[i][j] + mat_2[i][j];
@@ -179,16 +186,10 @@ public class composite_mm {
                 add(b_21, b_22)
             );
 
-            long[][] fin_11 = sub(
-                add(p,s),
-                add(t,v)
-            );
+            long[][] fin_11 = add(sub(add(p,s),t),v);
             long[][] fin_12 = add(r,t);
             long[][] fin_21 = add(q,s);
-            long[][] fin_22 = sub(
-                add(p,r),
-                add(q,u)
-            );
+            long[][] fin_22 = add(sub(add(p,r),q),u);
 
             for (int i = 0; i < mid; i++){
                 for (int j = 0; j < mid; j++) {
