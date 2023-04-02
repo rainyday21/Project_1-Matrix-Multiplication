@@ -3,7 +3,7 @@ import java.util.*;
 
 public class div_n_conq_mm {
     public static void main(String[] args){
-        int dim;;
+        int dim;
         if (args.length <= 0){
             System.out.print("Enter dimensions (2^x): ");
         Scanner kb = new Scanner(System.in);

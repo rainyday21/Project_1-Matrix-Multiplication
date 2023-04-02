@@ -1,10 +1,17 @@
 import java.util.*;
 public class strassen_mm {
     public static void main(String[] args){
-        System.out.print("Enter dimensions (2^x): ");
+        int dim;
+        if (args.length <= 0){
+            System.out.print("Enter dimensions (2^x): ");
         Scanner kb = new Scanner(System.in);
-        int dim = (int)Math.pow(2, kb.nextInt());
-        long[ ][] m_cust = new long[ dim][dim];
+        dim = (int)Math.pow(2, kb.nextInt());
+        kb.close();
+        }
+        else{
+            dim = (int)Math.pow(2, Integer.valueOf(args[0]));
+        }
+        long[][] m_cust = new long[ dim][dim];
         int count = 1;
         for (int i = 0; i < dim; i++) {
             for (int j = 0; j < dim; j++) {
@@ -16,7 +23,6 @@ public class strassen_mm {
         //long[ ][] m_2 = {{1,2}, {3,4}};
         System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
         System.out.println("Strassen:" + Arrays.deepToString(strassen(m_cust, m_cust)));
-        kb.close();
     }
 
     public static long[][] strassen(long[][] m_1, long[ ][] m_2) {
@@ -62,7 +68,7 @@ public class strassen_mm {
             );
             long[][] s = strassen(
                 a_22,
-                add(b_21, b_11)
+                sub(b_21, b_11)
             );
             long[][] t = strassen(
                 add(a_11, a_12),
@@ -110,8 +116,8 @@ public class strassen_mm {
         return ans;
     }
 
-    public static long[][] add(long [][] mat_1, long[][] mat_2){
-        long [][] comb = new long[mat_1.length][mat_2[0].length];
+    public static long[][] add(long[][] mat_1, long[][] mat_2){
+        long[][] comb = new long[mat_1.length][mat_2[0].length];
         for (int i = 0; i < mat_1.length; i++){
             for (int j = 0; j < mat_1.length; j++){
                 comb[i][j] = mat_1[i][j] + mat_2[i][j];
@@ -120,8 +126,8 @@ public class strassen_mm {
         return comb;
     }
 
-    public static long[][] sub(long [][] mat_1, long[][] mat_2){
-        long [][] comb = new long[mat_1.length][mat_2[0].length];
+    public static long[][] sub(long[][] mat_1, long[][] mat_2){
+        long[][] comb = new long[mat_1.length][mat_2[0].length];
         for (int i = 0; i < mat_1.length; i++){
             for (int j = 0; j < mat_1.length; j++){
                 comb[i][j] = mat_1[i][j] - mat_2[i][j];

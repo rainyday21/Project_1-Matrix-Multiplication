@@ -3,7 +3,7 @@ import java.util.*;
 
 public class composite_mm {
     public static void main(String[] args){
-        int dim;;
+        int dim;
         if (args.length <= 0){
             System.out.print("Enter dimensions (2^x): ");
         Scanner kb = new Scanner(System.in);
@@ -171,7 +171,7 @@ public class composite_mm {
             );
             long[][] s = strassen(
                 a_22,
-                add(b_21, b_11)
+                sub(b_21, b_11)
             );
             long[][] t = strassen(
                 add(a_11, a_12),
