@@ -39,7 +39,7 @@ public class classic_mm {
         for (int i  = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
                 mat_f[i][j] = 0;
-                for (int k = 0; k < mat_f.length-1; k++) {
+                for (int k = 0; k < mat_f.length; k++) {
                     mat_f[i][j] += mat_1[i][k] * mat_2[j][k];
                 }
             }
