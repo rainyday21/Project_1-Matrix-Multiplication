@@ -21,8 +21,8 @@ public class composite_mm {
                 count++;
             }
         }
-        //long[ ][] m_1 = {{1, 2, 3, 4}, {5, 6, 7}};
-        //long[ ][] m_2 = {{1,2}, {3,4}};
+        //long[][] m_1 = {{1, 2, 3, 4}, {5, 6, 7}};
+        //long[][] m_2 = {{1,2}, {3,4}};
         System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
         System.out.println("Classical array:" + Arrays.deepToString(classical(m_cust, m_cust)));
         System.out.println("Divide and Conquer array:" +
