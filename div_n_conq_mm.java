@@ -14,35 +14,46 @@ public class div_n_conq_mm {
             dim = (int)Math.pow(2, Integer.valueOf(args[0]));
         }
         long[][] m_cust = new long[dim][dim];
-        int count = 1;
-        for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                m_cust[i][j] = count;
-                count++;
-             }
+        if (dim <= 0) {
+            System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
+            System.out.println("Divide and Conquer array:" +
+                    Arrays.deepToString(m_cust));
+        }
+        else {
+            int count = 1;
+            for (int i = 0; i < dim; i++) {
+                for (int j = 0; j < dim; j++) {
+                    m_cust[i][j] = count;
+                    count++;
+                }
             }
-        System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
-        System.out.println("Divide and Conquer array:" +
-            Arrays.deepToString(div_n_conq(m_cust, m_cust)));
+            System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
+            System.out.println("Divide and Conquer array:" +
+                    Arrays.deepToString(div_n_conq(m_cust, m_cust)));
+        }
     }
     
     public static long[][] div_n_conq(long[][] mat_1, long[][] mat_2){
         long[][] ans;
-            if ((mat_1.length == 2) && (mat_1[0].length == 2)) {
+            if ((mat_1.length < 2) && mat_2[0].length < 2) {
+                ans = new long[mat_1.length][mat_2[0].length];
+                ans[0][0] = mat_1[0][0] * mat_2[0][0];
+            }
+            else if ((mat_1.length == 2) && (mat_2[0].length == 2)) {
                 ans = two_by_two(mat_1, mat_2);
             }
             else {
                 ans = new long[mat_1.length][mat_2.length];
                 int mid = mat_1.length/2;
-                long mat_1_11[][] = new long[mid][mid];
-                long mat_1_12[][] = new long[mid][mid];
-                long mat_1_21[][] = new long[mid][mid];
-                long mat_1_22[][] = new long[mid][mid];
+                long[][] mat_1_11 = new long[mid][mid];
+                long[][] mat_1_12 = new long[mid][mid];
+                long[][] mat_1_21 = new long[mid][mid];
+                long[][] mat_1_22 = new long[mid][mid];
 
-                long mat_2_11[][] = new long[mid][mid];
-                long mat_2_12[][] = new long[mid][mid];
-                long mat_2_21[][] = new long[mid][mid];
-                long mat_2_22[][] = new long[mid][mid];
+                long[][] mat_2_11 = new long[mid][mid];
+                long[][] mat_2_12 = new long[mid][mid];
+                long[][] mat_2_21 = new long[mid][mid];
+                long[][] mat_2_22 = new long[mid][mid];
                 
                 for (int i = 0; i < mid; i++) {
                     for (int j = 0; j < mid; j++) {
@@ -100,7 +111,7 @@ public class div_n_conq_mm {
     public static long[][] two_by_two(long[][] mat_1, long[][] mat_2){
         long[][] ans = new long[2][2];
         if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)){
-            if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)) {
+            if ((mat_2.length == mat_2[0].length) && (mat_2.length == 2)) {
                 ans[0][0] = (mat_1[0][0] * mat_2[0][0]) + (mat_1[0][1] * mat_2[1][0]);
                 ans[0][1] = (mat_1[0][0] * mat_2[0][1]) + (mat_1[0][1] * mat_2[1][1]);
                 ans[1][0] = (mat_1[1][0] * mat_2[0][0]) + (mat_1[1][1] * mat_2[1][0]);

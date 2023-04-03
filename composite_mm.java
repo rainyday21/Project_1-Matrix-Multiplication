@@ -6,28 +6,37 @@ public class composite_mm {
         int dim;
         if (args.length <= 0){
             System.out.print("Enter dimensions (2^x): ");
-        Scanner kb = new Scanner(System.in);
-        dim = (int)Math.pow(2, kb.nextInt());
-        kb.close();
+            Scanner kb = new Scanner(System.in);
+            dim = (int)Math.pow(2, kb.nextInt());
+            kb.close();
         }
         else{
             dim = (int)Math.pow(2, Integer.valueOf(args[0]));
         }
-        long[][] m_cust = new long[ dim][dim];
-        int count = 1;
-        for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                m_cust[i][j] = count;
-                count++;
-            }
+        long[][] m_cust = new long[dim][dim];
+        if (dim <= 0) {
+            System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
+            System.out.println("Classical array:" + Arrays.deepToString(m_cust));
+            System.out.println("Divide and Conquer array:" +
+                    Arrays.deepToString(m_cust));
+            System.out.println("Strassen array: " + Arrays.deepToString(m_cust));
         }
-        //long[][] m_1 = {{1, 2, 3, 4}, {5, 6, 7}};
-        //long[][] m_2 = {{1,2}, {3,4}};
-        System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
-        System.out.println("Classical array:" + Arrays.deepToString(classical(m_cust, m_cust)));
-        System.out.println("Divide and Conquer array:" +
-            Arrays.deepToString(div_n_conq(m_cust, m_cust)));
-        System.out.println("Strassen array: "+ Arrays.deepToString(strassen(m_cust, m_cust)));
+        else {
+            int count = 1;
+            for (int i = 0; i < dim; i++) {
+                for (int j = 0; j < dim; j++) {
+                    m_cust[i][j] = count;
+                    count++;
+                }
+            }
+            //long[][] m_1 = {{1, 2, 3, 4}, {5, 6, 7}};
+            //long[][] m_2 = {{1,2}, {3,4}};
+            System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
+            System.out.println("Classical array:" + Arrays.deepToString(classical(m_cust, m_cust)));
+            System.out.println("Divide and Conquer array:" +
+                    Arrays.deepToString(div_n_conq(m_cust, m_cust)));
+            System.out.println("Strassen array: " + Arrays.deepToString(strassen(m_cust, m_cust)));
+        }
     }
     
     public static long[][] classical(long[ ][] mat_1, long[ ][] mat_2){
