@@ -25,8 +25,6 @@ public class classic_mm {
         //long[][] m_2 = {{1,2}, {3,4}};
         System.out.println("Initial Array: " + Arrays.deepToString(m_cust));
         System.out.println("Classical array:" + Arrays.deepToString(classical(m_cust, m_cust)));
-        System.out.println("Divide and Conquer array:" +
-            Arrays.deepToString(classical(m_cust, m_cust)));
     }
     
     public static long[][] classical(long[][] mat_1, long[][] mat_2){
@@ -42,89 +40,6 @@ public class classic_mm {
             }
         }
         return mat_f;
-    }
-
-    public static long[][] div_n_conq(long[][] mat_1, long[][] mat_2){
-        long[][] ans;
-            if ((mat_1.length == 2) && (mat_1[0].length == 2)) {
-                ans = two_by_two(mat_1, mat_2);
-            }
-            else {
-                ans = new long[mat_1.length][mat_2.length];
-                long mat_1_11[][] = new long[mat_1.length/2][mat_1[0].length/2];
-                long mat_1_12[][] = new long[mat_1.length/2][mat_1[0].length/2];
-                long mat_1_21[][] = new long[mat_1.length/2][mat_1[0].length/2];
-                long mat_1_22[][] = new long[mat_1.length/2][mat_1[0].length/2];
-
-                long mat_2_11[][] = new long[mat_2.length/2][mat_1[0].length/2];
-                long mat_2_12[][] = new long[mat_2.length/2][mat_1[0].length/2];
-                long mat_2_21[][] = new long[mat_2.length/2][mat_1[0].length/2];
-                long mat_2_22[][] = new long[mat_2.length/2][mat_1[0].length/2];
-                
-                for (int i = 0; i < mat_1.length/2; i++) {
-                    for (int j = 0; j < mat_1[0].length/2; j++) {
-                        mat_1_11[i][j] = mat_1[i][j];
-                        mat_1_12[i][j] = mat_1[i][j+mat_1.length];
-                        mat_1_21[i][j] = mat_1[i+mat_1.length][j];
-                        mat_1_22[i][j] = mat_1[i+mat_1.length][j+mat_1.length];
-                        mat_2_11[i][j] = mat_2[i][j];
-                        mat_2_12[i][j] = mat_1[i][j+mat_1.length];
-                        mat_2_21[i][j] = mat_1[i+mat_1.length][j];
-                        mat_2_22[i][j] = mat_1[i+mat_1.length][j+mat_1.length];
-                    }
-                }
-                long[][] ans_11 = add(
-                        div_n_conq(mat_1_11, mat_2_11),
-                        div_n_conq(mat_1_12, mat_2_21)
-                    );
-                long[][] ans_12 = add(
-                        div_n_conq(mat_1_11, mat_2_12),
-                        div_n_conq(mat_1_12, mat_2_22)
-                    );
-                long[][] ans_21 = add(
-                        div_n_conq(mat_1_21, mat_2_11),
-                        div_n_conq(mat_1_22, mat_2_21)
-                    );
-                long[][] ans_22 = add(
-                        div_n_conq(mat_1_21, mat_2_12),
-                        div_n_conq(mat_1_22, mat_2_22)
-                    );
-
-                for (int i = 0; i < mat_1.length/2; i++) {
-                    for (int j = 0; i < mat_2[0].length/2; j++) {
-                        ans[i][j] = ans_11[i][j];
-                        ans[i][j+mat_1.length] = ans_12[i][j];
-                        ans[i+mat_1.length][j] = ans_21[i][j];
-                        ans[i+mat_1.length][j+mat_2.length] = ans_22[i][j];
-                    }
-                }
-                           
-            }
-        return ans;
-        
-    }
-
-    public static long[][] add(long [][] mat_1, long[][] mat_2){
-        long [][] comb = new long[mat_1.length][mat_2[0].length];
-        for (int i = 0; i < mat_1.length; i++){
-            for (int j = 0; j < mat_1.length; j++){
-                comb[i][j] = mat_1[i][j] + mat_2[i][j];
-            }
-        }
-        return comb;
-    }
-
-    public static long[][] two_by_two(long[][] mat_1, long[][] mat_2){
-        long[][] ans = new long[2][2];
-        if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)){
-            if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)) {
-                ans[0][0] = (mat_1[0][0] * mat_2[0][0]) + (mat_1[0][1] * mat_2[1][0]);
-                ans[0][1] = (mat_1[0][0] * mat_2[0][1]) + (mat_1[0][1] * mat_2[1][1]);
-                ans[1][0] = (mat_1[1][0] * mat_2[0][0]) + (mat_1[1][1] * mat_2[1][0]);
-                ans[1][1] = (mat_1[1][0] * mat_2[0][1]) + (mat_1[1][1] * mat_2[1][1]);
-            }
-        }
-        return ans;
     }
 
 }
