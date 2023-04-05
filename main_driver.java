@@ -46,7 +46,7 @@ public class main_driver {
         } else {
             Scanner kb = new Scanner(System.in);
             System.out.println("Enter amount of rows(2^x): ");
-            x = kb.nextInt();
+            x = (int)Math.pow(2,kb.nextInt());
             System.out.println("Enter amount of cols(2^x): ");
             y = (int)Math.pow(2,kb.nextInt());
             m1 = mat_gen(x, y);

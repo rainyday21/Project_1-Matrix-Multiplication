@@ -39,7 +39,7 @@ public class composite_mm {
         }
     }
 
-    public static long[][] classical(long[ ][] mat_1, long[ ][] mat_2){
+    public static long[][] classical(long[][] mat_1, long[][] mat_2){
         int rows = mat_1.length;
         int cols = mat_2[0].length;
         long[ ][] mat_f = new long[rows][cols];
@@ -60,7 +60,7 @@ public class composite_mm {
             ans[0][0] = mat_1[0][0] * mat_2[0][0];
         }
         else if ((mat_1.length == 2) && (mat_2[0].length == 2)) {
-            ans = two_by_two(mat_1, mat_2);
+            ans = mult(mat_1, mat_2);
         }
         else {
             ans = new long[mat_1.length][mat_2.length];
@@ -118,7 +118,7 @@ public class composite_mm {
 
     }
 
-    public static long[][] add(long [][] mat_1, long[][] mat_2){
+    public static long[][] add(long[][] mat_1, long[][] mat_2){
         long [][] comb = new long[mat_1.length][mat_2[0].length];
         for (int i = 0; i < mat_1.length; i++){
             for (int j = 0; j < mat_1.length; j++){
@@ -128,20 +128,7 @@ public class composite_mm {
         return comb;
     }
 
-    public static long[][] two_by_two(long[ ][] mat_1, long[ ][] mat_2){
-        long[ ][] ans = new long[ 2][2];
-        if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)){
-            if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)) {
-                ans[0][0] = (mat_1[0][0] * mat_2[0][0]) + (mat_1[0][1] * mat_2[1][0]);
-                ans[0][1] = (mat_1[0][0] * mat_2[0][1]) + (mat_1[0][1] * mat_2[1][1]);
-                ans[1][0] = (mat_1[1][0] * mat_2[0][0]) + (mat_1[1][1] * mat_2[1][0]);
-                ans[1][1] = (mat_1[1][0] * mat_2[0][1]) + (mat_1[1][1] * mat_2[1][1]);
-            }
-        }
-        return ans;
-    }
-
-    public static long[][] strassen(long[][] m_1, long[ ][] m_2) {
+    public static long[][] strassen(long[][] m_1, long[][] m_2) {
         long[][] mat_fin = new long[m_1.length][m_2[0].length];
         if (m_1.length == 2 && m_2.length == 2){
             mat_fin = mult(m_1, m_2);
