@@ -1,3 +1,6 @@
 *.class
 .vscode/
 *.docx*
+*idea*
+*iml*
+out/
