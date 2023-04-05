@@ -56,7 +56,7 @@ public class composite_mm {
     public static long[][] div_n_conq(long[ ][] mat_1, long[ ][] mat_2){
         long[ ][] ans;
             if ((mat_1.length == 2) && (mat_1[0].length == 2)) {
-                ans = two_by_two(mat_1, mat_2);
+                ans = mult(mat_1, mat_2);
             }
             else {
                 ans = new long[ mat_1.length][mat_2.length];
@@ -123,19 +123,7 @@ public class composite_mm {
         }
         return comb;
     }
-
-    public static long[][] two_by_two(long[ ][] mat_1, long[ ][] mat_2){
-        long[ ][] ans = new long[ 2][2];
-        if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)){
-            if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)) {
-                ans[0][0] = (mat_1[0][0] * mat_2[0][0]) + (mat_1[0][1] * mat_2[1][0]);
-                ans[0][1] = (mat_1[0][0] * mat_2[0][1]) + (mat_1[0][1] * mat_2[1][1]);
-                ans[1][0] = (mat_1[1][0] * mat_2[0][0]) + (mat_1[1][1] * mat_2[1][0]);
-                ans[1][1] = (mat_1[1][0] * mat_2[0][1]) + (mat_1[1][1] * mat_2[1][1]);
-            }
-        }
-        return ans;
-    }
+    
 
     public static long[][] strassen(long[][] m_1, long[ ][] m_2) {
         long[][] mat_fin = new long[m_1.length][m_2[0].length];
@@ -167,32 +155,32 @@ public class composite_mm {
             }
 
             long[][] p = strassen(
-                add(a_11, a_22),
-                add(b_11, b_22)
+                    add(a_11, a_22),
+                    add(b_11, b_22)
             );
             long[][] q = strassen(
-                add(a_21, a_22),
-                b_11
+                    add(a_21, a_22),
+                    b_11
             );
             long[][] r = strassen(
-                a_11,
-                sub(b_12,b_22)
+                    a_11,
+                    sub(b_12,b_22)
             );
             long[][] s = strassen(
-                a_22,
-                sub(b_21, b_11)
+                    a_22,
+                    sub(b_21, b_11)
             );
             long[][] t = strassen(
-                add(a_11, a_12),
-                b_22
+                    add(a_11, a_12),
+                    b_22
             );
             long[][] u = strassen(
-                sub(a_21, a_11),
-                add(b_11, b_12)
+                    sub(a_21, a_11),
+                    add(b_11, b_12)
             );
             long[][] v = strassen(
-                sub(a_12, a_22),
-                add(b_21, b_22)
+                    sub(a_12, a_22),
+                    add(b_21, b_22)
             );
 
             long[][] fin_11 = add(sub(add(p,s),t),v);
@@ -218,7 +206,7 @@ public class composite_mm {
     public static long[][] mult(long[][] mat_1, long[][] mat_2){
         long[][] ans = new long[mat_1.length][mat_2[0].length];
         if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)){
-            if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)) {
+            if ((mat_2.length == mat_2[0].length) && (mat_2[0].length == 2)) {
                 ans[0][0] = (mat_1[0][0] * mat_2[0][0]) + (mat_1[0][1] * mat_2[1][0]);
                 ans[0][1] = (mat_1[0][0] * mat_2[0][1]) + (mat_1[0][1] * mat_2[1][1]);
                 ans[1][0] = (mat_1[1][0] * mat_2[0][0]) + (mat_1[1][1] * mat_2[1][0]);
@@ -227,6 +215,7 @@ public class composite_mm {
         }
         return ans;
     }
+    
 
     public static long[][] sub(long [][] mat_1, long[][] mat_2){
         long [][] comb = new long[mat_1.length][mat_2[0].length];
