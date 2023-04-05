@@ -14,17 +14,23 @@ public class main_driver {
 
     public static void main(String[] args) {
         int option;
+        int x,y;
         long[][] m1,m2, ans;
-        long time,startTime,endTime;
+        long startTime,endTime;
+        double time;
         if (args.length > 2) {
-            m1 = mat_gen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-            m2 = mat_gen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+            x = (int)Math.pow(2, Integer.parseInt(args[0]));
+            y = (int)Math.pow(2, Integer.parseInt(args[1]));
+            m1 = mat_gen(x,y);
+            m2 = mat_gen(x,y);
             System.out.println("Matrix 1: " + Arrays.deepToString(m1));
             System.out.println("Matrix 2: " + Arrays.deepToString(m2));
             option = Integer.parseInt(args[2]);
         } else if (args.length == 2) {
-            m1 = mat_gen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-            m2 = mat_gen(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+            x = (int)Math.pow(2, Integer.parseInt(args[0]));
+            y = (int)Math.pow(2, Integer.parseInt(args[1]));
+            m1 = mat_gen(x,y);
+            m2 = mat_gen(x,y);
             System.out.println("Matrix 1: " + Arrays.deepToString(m1));
             System.out.println("Matrix 2: " + Arrays.deepToString(m2));
             System.out.println("Enter the matrix you wish to test: ");
@@ -38,12 +44,11 @@ public class main_driver {
             option = kb.nextInt();
             kb.close();
         } else {
-            int x,y;
             Scanner kb = new Scanner(System.in);
-            System.out.println("Enter amount of rows: ");
+            System.out.println("Enter amount of rows(2^x): ");
             x = kb.nextInt();
-            System.out.println("Enter amount of cols: ");
-            y = kb.nextInt();
+            System.out.println("Enter amount of cols(2^x): ");
+            y = (int)Math.pow(2,kb.nextInt());
             m1 = mat_gen(x, y);
             m2 = mat_gen(x, y);
             System.out.println("Matrix 1: " + Arrays.deepToString(m1));
@@ -63,7 +68,7 @@ public class main_driver {
                 startTime = System.nanoTime();
                 ans = composite_mm.classical(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime);
+                time = (double)(endTime - startTime)/Math.pow(10,9);
                 System.out.println("Classical: " + Arrays.deepToString(ans));
                 System.out.println("Time: " + time);
                 break;
@@ -71,7 +76,7 @@ public class main_driver {
                 startTime = System.nanoTime();
                 ans = composite_mm.div_n_conq(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime);
+                time = (double)(endTime - startTime)/Math.pow(10,9);
                 System.out.println("Divide and Conquer: " + Arrays.deepToString(ans));
                 System.out.println("Time: " + time);
                 break;
@@ -79,7 +84,7 @@ public class main_driver {
                 startTime = System.nanoTime();
                 ans = composite_mm.strassen(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime);
+                time = (double)(endTime - startTime)/Math.pow(10,9);
                 System.out.println("Strassen: " + Arrays.deepToString(ans));
                 System.out.println("Time: " + time);
                 break;
@@ -89,7 +94,7 @@ public class main_driver {
                 long[][] ans2 = composite_mm.div_n_conq(m1,m2);
                 long[][] ans3 = composite_mm.strassen(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime);
+                time = (endTime - startTime)/(double)10000;
                 System.out.println("Classical: " + Arrays.deepToString(ans));
                 System.out.println("Divide and Conquer: " + Arrays.deepToString(ans2));
                 System.out.println("Strassen: " + Arrays.deepToString(ans3));
