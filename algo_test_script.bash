@@ -7,6 +7,7 @@ fi
   x=0
   while [[ $x -le $y ]]; do
     java composite_mm $x $x 3 >> results.txt
+    y=$(y+1)
     done
 
 
