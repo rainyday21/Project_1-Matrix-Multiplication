@@ -89,16 +89,26 @@ public class main_driver {
                 System.out.println("Time: " + time);
                 break;
             case 3:
+                long[][] ans2;
+                long[][] ans3;
                 startTime = System.nanoTime();
                 ans = composite_mm.classical(m1,m2);
-                long[][] ans2 = composite_mm.div_n_conq(m1,m2);
-                long[][] ans3 = composite_mm.strassen(m1,m2);
                 endTime = System.nanoTime();
                 time = (endTime - startTime)/(double)10000;
                 System.out.println("Classical: " + Arrays.deepToString(ans));
+                System.out.println("Time: " + time); // Classical
+                startTime = System.nanoTime();
+                ans2 = composite_mm.div_n_conq(m1,m2);
+                endTime = System.nanoTime();
+                time = (endTime - startTime)/(double)10000;
                 System.out.println("Divide and Conquer: " + Arrays.deepToString(ans2));
+                System.out.println("Time: " + time); // Div and Conq
+                startTime = System.nanoTime();
+                ans3 = composite_mm.strassen(m1,m2);
+                endTime = System.nanoTime();
+                time = (endTime - startTime)/(double)10000;
                 System.out.println("Strassen: " + Arrays.deepToString(ans3));
-                System.out.println("Time: " + time);
+                System.out.println("Time: " + time); // Strassen
                 break;
 
         }

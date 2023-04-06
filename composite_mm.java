@@ -133,6 +133,9 @@ public class composite_mm {
         if (m_1.length == 2 && m_2.length == 2){
             mat_fin = mult(m_1, m_2);
         }
+        else if (m_1.length < 2 && m_2[0].length < 2) {
+            mat_fin = new long[][]{{m_1[0][0]*m_2[0][0]}};
+        }
         else {
             int mid = m_1.length/2;
             long[][] a_11 = new long[mid][mid];
