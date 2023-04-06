@@ -38,8 +38,8 @@ public class composite_mm {
             System.out.println("Strassen array: " + Arrays.deepToString(strassen(m_cust, m_cust)));
         }
     }
-    
-    public static long[][] classical(long[ ][] mat_1, long[ ][] mat_2){
+
+    public static long[][] classical(long[][] mat_1, long[][] mat_2){
         int rows = mat_1.length;
         int cols = mat_2[0].length;
         long[ ][] mat_f = new long[rows][cols];
@@ -53,68 +53,72 @@ public class composite_mm {
         return mat_f;
     }
 
-    public static long[][] div_n_conq(long[ ][] mat_1, long[ ][] mat_2){
-        long[ ][] ans;
-            if ((mat_1.length == 2) && (mat_1[0].length == 2)) {
-                ans = two_by_two(mat_1, mat_2);
-            }
-            else {
-                ans = new long[ mat_1.length][mat_2.length];
-                int mid = mat_1.length/2;
-                long mat_1_11[][] = new long[ mid][mid];
-                long mat_1_12[][] = new long[ mid][mid];
-                long mat_1_21[][] = new long[ mid][mid];
-                long mat_1_22[][] = new long[ mid][mid];
+    public static long[][] div_n_conq(long[][] mat_1, long[][] mat_2){
+        long[][] ans;
+        if ((mat_1.length < 2) && mat_2[0].length < 2) {
+            ans = new long[mat_1.length][mat_2[0].length];
+            ans[0][0] = mat_1[0][0] * mat_2[0][0];
+        }
+        else if ((mat_1.length == 2) && (mat_2[0].length == 2)) {
+            ans = mult(mat_1, mat_2);
+        }
+        else {
+            ans = new long[mat_1.length][mat_2.length];
+            int mid = mat_1.length/2;
+            long[][] mat_1_11 = new long[mid][mid];
+            long[][] mat_1_12 = new long[mid][mid];
+            long[][] mat_1_21 = new long[mid][mid];
+            long[][] mat_1_22 = new long[mid][mid];
 
-                long mat_2_11[][] = new long[ mid][mid];
-                long mat_2_12[][] = new long[ mid][mid];
-                long mat_2_21[][] = new long[ mid][mid];
-                long mat_2_22[][] = new long[ mid][mid];
-                
-                for (int i = 0; i < mid; i++) {
-                    for (int j = 0; j < mid; j++) {
-                        mat_1_11[i][j] = mat_1[i][j];
-                        mat_1_12[i][j] = mat_1[i][j+mid];
-                        mat_1_21[i][j] = mat_1[i+mid][j];
-                        mat_1_22[i][j] = mat_1[i+mid][j+mid];
-                        mat_2_11[i][j] = mat_2[i][j];
-                        mat_2_12[i][j] = mat_2[i][j+mid];
-                        mat_2_21[i][j] = mat_2[i+mid][j];
-                        mat_2_22[i][j] = mat_2[i+mid][j+mid];
-                    }
-                }
-                long[ ][] ans_11 = add(
-                        div_n_conq(mat_1_11, mat_2_11),
-                        div_n_conq(mat_1_12, mat_2_21)
-                    );
-                long[ ][] ans_12 = add(
-                        div_n_conq(mat_1_11, mat_2_12),
-                        div_n_conq(mat_1_12, mat_2_22)
-                    );
-                long[ ][] ans_21 = add(
-                        div_n_conq(mat_1_21, mat_2_11),
-                        div_n_conq(mat_1_22, mat_2_21)
-                    );
-                long[ ][] ans_22 = add(
-                        div_n_conq(mat_1_21, mat_2_12),
-                        div_n_conq(mat_1_22, mat_2_22)
-                    );
+            long[][] mat_2_11 = new long[mid][mid];
+            long[][] mat_2_12 = new long[mid][mid];
+            long[][] mat_2_21 = new long[mid][mid];
+            long[][] mat_2_22 = new long[mid][mid];
 
-                for (int i = 0; i < mid; i++) {
-                    for (int j = 0; j < mid; j++) {
-                        ans[i][j] = ans_11[i][j];
-                        ans[i][j+mid] = ans_12[i][j];
-                        ans[i+mid][j] = ans_21[i][j];
-                        ans[i+mid][j+mid] = ans_22[i][j];
-                    }
+            for (int i = 0; i < mid; i++) {
+                for (int j = 0; j < mid; j++) {
+                    mat_1_11[i][j] = mat_1[i][j];
+                    mat_1_12[i][j] = mat_1[i][j+mid];
+                    mat_1_21[i][j] = mat_1[i+mid][j];
+                    mat_1_22[i][j] = mat_1[i+mid][j+mid];
+                    mat_2_11[i][j] = mat_2[i][j];
+                    mat_2_12[i][j] = mat_2[i][j+mid];
+                    mat_2_21[i][j] = mat_2[i+mid][j];
+                    mat_2_22[i][j] = mat_2[i+mid][j+mid];
                 }
-                           
             }
+            long[][] ans_11 = add(
+                    div_n_conq(mat_1_11, mat_2_11),
+                    div_n_conq(mat_1_12, mat_2_21)
+            );
+            long[][] ans_12 = add(
+                    div_n_conq(mat_1_11, mat_2_12),
+                    div_n_conq(mat_1_12, mat_2_22)
+            );
+            long[][] ans_21 = add(
+                    div_n_conq(mat_1_21, mat_2_11),
+                    div_n_conq(mat_1_22, mat_2_21)
+            );
+            long[][] ans_22 = add(
+                    div_n_conq(mat_1_21, mat_2_12),
+                    div_n_conq(mat_1_22, mat_2_22)
+            );
+
+            for (int i = 0; i < mid; i++) {
+                for (int j = 0; j < mid; j++) {
+                    ans[i][j] = ans_11[i][j];
+                    ans[i][j+mid] = ans_12[i][j];
+                    ans[i+mid][j] = ans_21[i][j];
+                    ans[i+mid][j+mid] = ans_22[i][j];
+                }
+            }
+
+        }
         return ans;
-        
+
     }
 
-    public static long[][] add(long [][] mat_1, long[][] mat_2){
+    public static long[][] add(long[][] mat_1, long[][] mat_2){
         long [][] comb = new long[mat_1.length][mat_2[0].length];
         for (int i = 0; i < mat_1.length; i++){
             for (int j = 0; j < mat_1.length; j++){
@@ -124,23 +128,13 @@ public class composite_mm {
         return comb;
     }
 
-    public static long[][] two_by_two(long[ ][] mat_1, long[ ][] mat_2){
-        long[ ][] ans = new long[ 2][2];
-        if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)){
-            if ((mat_1.length == mat_1[0].length) && (mat_1.length == 2)) {
-                ans[0][0] = (mat_1[0][0] * mat_2[0][0]) + (mat_1[0][1] * mat_2[1][0]);
-                ans[0][1] = (mat_1[0][0] * mat_2[0][1]) + (mat_1[0][1] * mat_2[1][1]);
-                ans[1][0] = (mat_1[1][0] * mat_2[0][0]) + (mat_1[1][1] * mat_2[1][0]);
-                ans[1][1] = (mat_1[1][0] * mat_2[0][1]) + (mat_1[1][1] * mat_2[1][1]);
-            }
-        }
-        return ans;
-    }
-
-    public static long[][] strassen(long[][] m_1, long[ ][] m_2) {
+    public static long[][] strassen(long[][] m_1, long[][] m_2) {
         long[][] mat_fin = new long[m_1.length][m_2[0].length];
         if (m_1.length == 2 && m_2.length == 2){
             mat_fin = mult(m_1, m_2);
+        }
+        else if (m_1.length < 2 && m_2[0].length < 2) {
+            mat_fin = new long[][]{{m_1[0][0]*m_2[0][0]}};
         }
         else {
             int mid = m_1.length/2;
@@ -167,32 +161,32 @@ public class composite_mm {
             }
 
             long[][] p = strassen(
-                add(a_11, a_22),
-                add(b_11, b_22)
+                    add(a_11, a_22),
+                    add(b_11, b_22)
             );
             long[][] q = strassen(
-                add(a_21, a_22),
-                b_11
+                    add(a_21, a_22),
+                    b_11
             );
             long[][] r = strassen(
-                a_11,
-                sub(b_12,b_22)
+                    a_11,
+                    sub(b_12,b_22)
             );
             long[][] s = strassen(
-                a_22,
-                sub(b_21, b_11)
+                    a_22,
+                    sub(b_21, b_11)
             );
             long[][] t = strassen(
-                add(a_11, a_12),
-                b_22
+                    add(a_11, a_12),
+                    b_22
             );
             long[][] u = strassen(
-                sub(a_21, a_11),
-                add(b_11, b_12)
+                    sub(a_21, a_11),
+                    add(b_11, b_12)
             );
             long[][] v = strassen(
-                sub(a_12, a_22),
-                add(b_21, b_22)
+                    sub(a_12, a_22),
+                    add(b_21, b_22)
             );
 
             long[][] fin_11 = add(sub(add(p,s),t),v);
