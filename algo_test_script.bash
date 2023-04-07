@@ -8,7 +8,6 @@ fi
   javac composite_mm.java && javac main_driver.java
   if [[ -e "results.txt" ]]; then
     rm "results.txt"
-
   fi
   while [[ $x -le $y ]]; do
     java main_driver $x $x 3 >> results.txt
