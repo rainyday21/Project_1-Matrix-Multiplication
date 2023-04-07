@@ -11,7 +11,7 @@ fi
   fi
   while [[ $x -le $y ]]; do
     java main_driver $x $x 3 >> results.txt
-    x=$(($x+1))
+    x=$((x+1))
     done
 
 

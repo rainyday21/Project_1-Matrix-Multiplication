@@ -154,9 +154,9 @@ public class composite_mm {
                     a_21[i][j] = m_1[i+mid][j];
                     a_22[i][j] = m_1[i+mid][j+mid];
                     b_11[i][j] = m_2[i][j];
-                    b_12[i][j] = m_1[i][j+mid];
-                    b_21[i][j] = m_1[i+mid][j];
-                    b_22[i][j] = m_1[i+mid][j+mid];
+                    b_12[i][j] = m_2[i][j+mid];
+                    b_21[i][j] = m_2[i+mid][j];
+                    b_22[i][j] = m_2[i+mid][j+mid];
                 }
             }
 

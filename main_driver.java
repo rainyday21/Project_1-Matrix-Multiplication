@@ -68,25 +68,25 @@ public class main_driver {
                 startTime = System.nanoTime();
                 ans = composite_mm.classical(m1,m2);
                 endTime = System.nanoTime();
-                time = (double)(endTime - startTime)/Math.pow(10,9);
+                time = (double)(endTime - startTime)/(double)1000;
                 System.out.println("Classical: " + Arrays.deepToString(ans));
-                System.out.println("Time: " + time);
+                System.out.println("Time(Classical): " + time + "microseconds");
                 break;
             case 1:
                 startTime = System.nanoTime();
                 ans = composite_mm.div_n_conq(m1,m2);
                 endTime = System.nanoTime();
-                time = (double)(endTime - startTime)/Math.pow(10,9);
+                time = (double)(endTime - startTime)/(double)1000;
                 System.out.println("Divide and Conquer: " + Arrays.deepToString(ans));
-                System.out.println("Time: " + time);
+                System.out.println("Time(Div_n_Conq: " + time + "microseconds");
                 break;
             case 2:
                 startTime = System.nanoTime();
                 ans = composite_mm.strassen(m1,m2);
                 endTime = System.nanoTime();
-                time = (double)(endTime - startTime)/Math.pow(10,9);
+                time = (double)(endTime - startTime)/(double)1000;
                 System.out.println("Strassen: " + Arrays.deepToString(ans));
-                System.out.println("Time: " + time);
+                System.out.println("Time(Strassen): " + time + "microseconds");
                 break;
             case 3:
                 long[][] ans2;
@@ -94,21 +94,21 @@ public class main_driver {
                 startTime = System.nanoTime();
                 ans = composite_mm.classical(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime)/(double)10000;
+                time = (endTime - startTime)/(double)1000;
                 System.out.println("Classical: " + Arrays.deepToString(ans));
-                System.out.println("Time: " + time); // Classical
+                System.out.println("Time(classical): " + time + "microseconds"); // Classical
                 startTime = System.nanoTime();
                 ans2 = composite_mm.div_n_conq(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime)/(double)10000;
+                time = (endTime - startTime)/(double)1000;
                 System.out.println("Divide and Conquer: " + Arrays.deepToString(ans2));
-                System.out.println("Time: " + time); // Div and Conq
+                System.out.println("Time(div_n_conq: " + time + "microseconds"); // Div and Conq
                 startTime = System.nanoTime();
                 ans3 = composite_mm.strassen(m1,m2);
                 endTime = System.nanoTime();
                 time = (endTime - startTime)/(double)10000;
                 System.out.println("Strassen: " + Arrays.deepToString(ans3));
-                System.out.println("Time: " + time); // Strassen
+                System.out.println("Time(strassen): " + time + "microseconds"); // Strassen
                 break;
 
         }
