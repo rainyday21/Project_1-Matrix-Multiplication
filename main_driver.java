@@ -11,13 +11,14 @@ public class main_driver {
         }
         return mat;
     }
+    
 
     public static void main(String[] args) {
         int option;
         int x,y;
         long[][] m1,m2, ans;
         long startTime,endTime;
-        double time;
+        algo_time time;
         if (args.length > 2) {
             x = (int)Math.pow(2, Integer.parseInt(args[0]));
             y = (int)Math.pow(2, Integer.parseInt(args[1]));
@@ -68,25 +69,25 @@ public class main_driver {
                 startTime = System.nanoTime();
                 ans = composite_mm.classical(m1,m2);
                 endTime = System.nanoTime();
-                time = (double)(endTime - startTime)/(double)1000;
+                time = new algo_time(startTime, endTime);
                 System.out.println("Classical: " + Arrays.deepToString(ans));
-                System.out.println("Time(Classical): " + time + "microseconds");
+                System.out.println("Time(Classical): " + time.toString());
                 break;
             case 1:
                 startTime = System.nanoTime();
                 ans = composite_mm.div_n_conq(m1,m2);
                 endTime = System.nanoTime();
-                time = (double)(endTime - startTime)/(double)1000;
+                time = new algo_time(startTime, endTime);
                 System.out.println("Divide and Conquer: " + Arrays.deepToString(ans));
-                System.out.println("Time(Div_n_Conq: " + time + "microseconds");
+                System.out.println("Time(Div_n_Conq): " + time.toString());
                 break;
             case 2:
                 startTime = System.nanoTime();
                 ans = composite_mm.strassen(m1,m2);
                 endTime = System.nanoTime();
-                time = (double)(endTime - startTime)/(double)1000;
+                time = new algo_time(startTime, endTime);
                 System.out.println("Strassen: " + Arrays.deepToString(ans));
-                System.out.println("Time(Strassen): " + time + "microseconds");
+                System.out.println("Time(Strassen): " + time.toString());
                 break;
             case 3:
                 long[][] ans2;
@@ -94,24 +95,57 @@ public class main_driver {
                 startTime = System.nanoTime();
                 ans = composite_mm.classical(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime)/(double)1000;
+                time = new algo_time(startTime, endTime);
                 System.out.println("Classical: " + Arrays.deepToString(ans));
-                System.out.println("Time(classical): " + time + "microseconds"); // Classical
+                System.out.println("Time(classical): " + time.toString()); // Classical
                 startTime = System.nanoTime();
                 ans2 = composite_mm.div_n_conq(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime)/(double)1000;
+                time = new algo_time(startTime, endTime);
                 System.out.println("Divide and Conquer: " + Arrays.deepToString(ans2));
-                System.out.println("Time(div_n_conq: " + time + "microseconds"); // Div and Conq
+                System.out.println("Time(div_n_conq): " + time.toString()); // Div and Conq
                 startTime = System.nanoTime();
                 ans3 = composite_mm.strassen(m1,m2);
                 endTime = System.nanoTime();
-                time = (endTime - startTime)/(double)10000;
+                time = new algo_time(startTime, endTime);
                 System.out.println("Strassen: " + Arrays.deepToString(ans3));
-                System.out.println("Time(strassen): " + time + "microseconds"); // Strassen
+                System.out.println("Time(strassen): " + time.toString()); // Strassen
                 break;
 
         }
+    }
+}
+
+class algo_time {
+    private double elapsed;
+    private int option;
+    public algo_time (double st_tm, double end_tm){
+        elapsed = end_tm - st_tm;
+        option = 0;
+    }
+    
+    public algo_time(){elapsed = 0;} 
+    
+    public double at_raw(){
+        return elapsed;
+    }
+    
+    public void setOption(){
+        while (elapsed > 1000 && option < 2) {
+            elapsed/=1000;
+            option+=1;
+            setOption();
+        }
+
+    }
+    public String toString() {
+        String ret = elapsed + " nanoseconds";;
+        setOption();
+        if (option == 1)
+            ret = elapsed + " microseconds";
+        else if (option == 2)
+                ret = elapsed + " seconds";
+        return ret;
     }
 }
 
