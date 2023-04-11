@@ -19,19 +19,44 @@ public class main_driver {
         long[][] m1,m2, ans;
         long startTime,endTime;
         algo_time time;
+        Scanner kb = new Scanner(System.in);
         if (args.length > 2) {
             x = (int)Math.pow(2, Integer.parseInt(args[0]));
             y = (int)Math.pow(2, Integer.parseInt(args[1]));
-            m1 = mat_gen(x,y);
-            m2 = mat_gen(x,y);
+            m1 = new long[x][y];
+            m2 = new long[x][y];
+            System.out.println("Enter elements of matrix 1: ");
+            for (int i = 0; i < x; i++){
+                for (int j = 0; j < y; j++) {
+                    m1[i][j] = kb.nextLong();
+                }
+            }
+            System.out.println("Enter elements of matrix 2: ");
+            for (int i  = 0; i < x; i++){
+                for (int j = 0; j < y; j++) {
+                    m2[i][j] = kb.nextLong();
+                }
+            }
             System.out.println("Matrix 1: " + Arrays.deepToString(m1));
             System.out.println("Matrix 2: " + Arrays.deepToString(m2));
             option = Integer.parseInt(args[2]);
         } else if (args.length == 2) {
             x = (int)Math.pow(2, Integer.parseInt(args[0]));
             y = (int)Math.pow(2, Integer.parseInt(args[1]));
-            m1 = mat_gen(x,y);
-            m2 = mat_gen(x,y);
+            m1 = new long[x][y];
+            m2 = new long[x][y];
+            System.out.println("Enter elements of matrix 1: ");
+            for (int i  = 0; i < x; i++){
+                for (int j = 0; j < y; j++) {
+                    m1[i][j] = kb.nextLong();
+                }
+            }
+            System.out.println("Enter elements of matrix 2: ");
+            for (int i  = 0; i < x; i++){
+                for (int j = 0; j < y; j++) {
+                    m2[i][j] = kb.nextLong();
+                }
+            }
             System.out.println("Matrix 1: " + Arrays.deepToString(m1));
             System.out.println("Matrix 2: " + Arrays.deepToString(m2));
             System.out.println("Enter the matrix you wish to test: ");
@@ -41,17 +66,27 @@ public class main_driver {
                     Straseen(2)
                     All(3)
                     Enter:\s""");
-            Scanner kb = new Scanner(System.in);
             option = kb.nextInt();
             kb.close();
         } else {
-            Scanner kb = new Scanner(System.in);
             System.out.println("Enter amount of rows(2^x): ");
             x = (int)Math.pow(2,kb.nextInt());
             System.out.println("Enter amount of cols(2^x): ");
             y = (int)Math.pow(2,kb.nextInt());
-            m1 = mat_gen(x, y);
-            m2 = mat_gen(x, y);
+            m1 = new long[x][y];
+            m2 = new long[x][y];
+            System.out.println("Enter elements of matrix 1: ");
+            for (int i  = 0; i < x; i++){
+                for (int j = 0; j < y; j++) {
+                    m1[i][j] = kb.nextLong();
+                }
+            }
+            System.out.println("Enter elements of matrix 2: ");
+            for (int i  = 0; i < x; i++){
+                for (int j = 0; j < y; j++) {
+                    m2[i][j] = kb.nextLong();
+                }
+            }
             System.out.println("Matrix 1: " + Arrays.deepToString(m1));
             System.out.println("Matrix 2: " + Arrays.deepToString(m2));
             System.out.println("Enter the matrix you wish to test: ");
