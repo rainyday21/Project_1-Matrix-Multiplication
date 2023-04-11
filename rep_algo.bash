@@ -9,7 +9,7 @@ x=0
     rm "results_time.txt"
   fi
 while [[ $x -lt $y ]]; do
-echo "--- New Test: ---" >> results_time.txt
+echo "--- New Test: ---" | tee -a results_time.txt
 ./algo_test_script.bash "$y"
 x=$((x+1))
 sleep 2

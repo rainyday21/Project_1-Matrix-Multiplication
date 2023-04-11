@@ -10,7 +10,7 @@ fi
     rm "results.txt"
   fi
   while [[ $x -le $y ]]; do
-    java main_driver $x $x 3 >> results.txt
+    java main_driver $x $x 3 | tee -a results.txt
     x=$((x+1))
     done
   #echo "--- New Test: ---" >> results_time.txt
